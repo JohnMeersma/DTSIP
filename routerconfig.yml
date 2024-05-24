@@ -1,6 +1,6 @@
 --- 
 - name: Configure Cisco 1000v Router
-  hosts: cisco_router
+  hosts: cisco
   gather_facts: no
   connection: network_cli
   vars:
@@ -71,3 +71,5 @@
           - voice-class sip bind control source-interface Gi0/1
           - voice-class sip bind media source-interface Gi0/1
         parents: dial-peer voice 201 voip
+
+John Meersma
