@@ -77,7 +77,8 @@ Run the master playbook (main.yml) to apply configurations to all routers:
 ```
 ansible-playbook -i hosts main.yml
 ```
-Directory Structure
+### Directory Structure
+
 Here is an overview of the key files and directories in this repository:
 
 ```
