@@ -54,8 +54,8 @@
           - destination e164-pattern-map 1
           - voice-class codec 1
           - dtmf-relay rtp-nte
-          - voice-class sip bind control source-interface Gi0/0
-          - voice-class sip bind media source-interface Gi0/0
+          - voice-class sip bind control source-interface Gi1
+          - voice-class sip bind media source-interface Gi1
         parents: dial-peer voice 101 voip
 
     - name: Configure dial-peer voice 201 voip
@@ -68,8 +68,6 @@
           - destination e164-pattern-map 2
           - voice-class codec 1
           - dtmf-relay rtp-nte
-          - voice-class sip bind control source-interface Gi0/1
-          - voice-class sip bind media source-interface Gi0/1
+          - voice-class sip bind control source-interface Gi2
+          - voice-class sip bind media source-interface Gi2
         parents: dial-peer voice 201 voip
-
-John Meersma
