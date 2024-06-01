@@ -46,27 +46,20 @@ Install the required Python packages listed in requirements.txt:
 pip install -r requirements.txt
 ```
 
-### Step 6: Install Certifi
-
-Install Certifi:
-```
-pip install certifi
-```
-
-### Step 7: Install Ansible Collections
+### Step 6: Install Ansible Collections
 
 Install the necessary Ansible collections specified in requirements.yml:
 ```
 ansible-galaxy collection install -r requirements.yml
 ```
-### Step 8: Disable Host Key Checking
+### Step 7: Disable Host Key Checking
 
 Disable host key checking to avoid SSH key verification issues:
 ```
 export ANSIBLE_HOST_KEY_CHECKING=False
 ```
 
-### Step 9: Prepare the Inventory File
+### Step 8: Prepare the Inventory File
 
 Ensure your hosts inventory file includes all router configurations. Here is an example hosts file:
 
@@ -82,7 +75,7 @@ router7 ansible_host=10.1.5.18 ansible_user=admin ansible_password=admin ansible
 router8 ansible_host=10.1.5.19 ansible_user=admin ansible_password=admin ansible_network_os=ios
 ```
 
-### Step 10: Run the Master Playbook
+### Step 9: Run the Master Playbook
 
 Run the master playbook (main.yml) to apply configurations to all routers:
 ```
