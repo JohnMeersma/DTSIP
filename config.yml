@@ -5,6 +5,31 @@
   connection: network_cli
 
   tasks:
+    - name: Configure SIP and voice service settings
+      ios_config:
+        lines:
+          - mode border-element
+          - allow-connections sip to sip
+          - address-hiding
+          - pass-thru headers unsupp
+          - header-passing
+          - error-passthru
+          - g729 annexb-all
+        parents: voice service voip
+
+    - name: Configure h323 settings
+      ios_config:
+        lines:
+          - call service stop
+        parents: voice service voip h323
+
+    - name: Configure gateway settings
+      ios_config:
+        lines:
+          - media-inactivity-criteria all
+          - timer receive-rtcp 5
+        parents: gateway
+
     - name: Configure voice class codec
       ios_config:
         lines:
@@ -71,31 +96,6 @@
           - voice-class sip bind control source-interface Gi2
           - voice-class sip bind media source-interface Gi2
         parents: dial-peer voice 201 voip
-
-    - name: Configure SIP and voice service settings
-      ios_config:
-        lines:
-          - mode border-element
-          - allow-connections sip to sip
-          - address-hiding
-          - pass-thru headers unsupp
-          - header-passing
-          - error-passthru
-          - g729 annexb-all
-        parents: voice service voip
-
-    - name: Configure h323 settings
-      ios_config:
-        lines:
-          - call service stop
-        parents: voice service voip h323
-
-    - name: Configure gateway settings
-      ios_config:
-        lines:
-          - media-inactivity-criteria all
-          - timer receive-rtcp 5
-        parents: gateway
 
     - name: Configure redundancy settings
       ios_config:
