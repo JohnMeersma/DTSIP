@@ -16,7 +16,7 @@ This repository contains Ansible playbooks to configure multiple Cisco 1000v rou
 Clone the DTSIP repository to your local machine
 
 ```
-git clone <https://github.com/JohnMeersma/DTSIP.git>
+git clone https://github.com/JohnMeersma/DTSIP.git
 cd DTSIP
 ```
 
