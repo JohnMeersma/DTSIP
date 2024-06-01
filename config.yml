@@ -11,17 +11,7 @@
           - mode border-element
           - allow-connections sip to sip
           - address-hiding
-          - pass-thru headers unsupp
-          - header-passing
-          - error-passthru
-          - g729 annexb-all
         parents: voice service voip
-
-    - name: Configure h323 settings
-      ios_config:
-        lines:
-          - call service stop
-        parents: voice service voip h323
 
     - name: Configure gateway settings
       ios_config:
