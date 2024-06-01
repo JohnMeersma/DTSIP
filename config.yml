@@ -59,32 +59,28 @@
       ios_config:
         lines:
           - description CUCM-Facing
+          - session protocol sipv2
+          - session server-group 1
           - destination e164-pattern-map 1
           - incoming called e164-pattern-map 2
-          - session protocol sipv2
-          - session transport udp
-          - session server-group 1
-          - max-conn 5
-          - dtmf-relay rtp-nte
           - voice-class codec 1
           - voice-class sip bind control source-interface Gi1
           - voice-class sip bind media source-interface Gi1
+          - dtmf-relay rtp-nte
         parents: dial-peer voice 101 voip
 
     - name: Configure dial-peer voice 201 voip
       ios_config:
         lines:
           - description PSTN-Facing Inbound-Outbound
-          - incoming called e164-pattern-map 1
-          - max-conn 5
-          - destination e164-pattern-map 2
           - session protocol sipv2
-          - session transport udp
           - session server-group 2
-          - dtmf-relay rtp-nte
+          - destination e164-pattern-map 2
+          - incoming called e164-pattern-map 1
           - voice-class codec 1
           - voice-class sip bind control source-interface Gi2
           - voice-class sip bind media source-interface Gi2
+          - dtmf-relay rtp-nte
         parents: dial-peer voice 201 voip
 
     - name: Configure redundancy settings
