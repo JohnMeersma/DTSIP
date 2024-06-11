@@ -19,7 +19,7 @@
           - allow-connections sip to sip
         parents: voice service voip
         
-   - name: Configure voice class server-group 1
+    - name: Configure voice class server-group 1
       ios_config:
         lines:
           - ipv4 10.1.5.15
