@@ -1,82 +1,78 @@
 ---
-- name: Configure Cisco 1000v Router
-  hosts: cisco
-  gather_facts: no
-  connection: network_cli
+# pod1.yml
 
-  tasks:
-    - name: Configure voice class codec
-      ios_config:
-        lines:
-          - codec preference 1 g711ulaw
-          - codec preference 2 g729r8
-        parents: voice class codec 1
+- name: Configure voice class codec
+  ios_config:
+    lines:
+      - codec preference 1 g711ulaw
+      - codec preference 2 g729r8
+    parents: voice class codec 1
 
-    - name: Configure SIP and voice service settings
-      ios_config:
-        lines:
-          - mode border-element
-          - allow-connections sip to sip
-        parents: voice service voip
-        
-    - name: Configure voice class server-group 1
-      ios_config:
-        lines:
-          - ipv4 10.4.5.15
-        parents: voice class server-group 1
+- name: Configure SIP and voice service settings
+  ios_config:
+    lines:
+      - mode border-element
+      - allow-connections sip to sip
+    parents: voice service voip
 
-    - name: Configure voice class server-group 2
-      ios_config:
-        lines:
-          - ipv4 10.250.250.201
-        parents: voice class server-group 2
+- name: Configure voice class server-group 1
+  ios_config:
+    lines:
+      - ipv4 10.4.5.15
+    parents: voice class server-group 1
 
-    - name: Configure voice class e164-pattern-map 1
-      ios_config:
-        lines:
-          - e164 514555[23]...
-          - e164 555[23]...
-        parents: voice class e164-pattern-map 1
+- name: Configure voice class server-group 2
+  ios_config:
+    lines:
+      - ipv4 10.250.250.201
+    parents: voice class server-group 2
 
-    - name: Configure voice class e164-pattern-map 2
-      ios_config:
-        lines:
-          - e164 +011
-          - e164 +1[2-9]..[2-9]......
-          - e164 +[2-9]..[2-9]......
-          - e164 +911
-        parents: voice class e164-pattern-map 2
+- name: Configure voice class e164-pattern-map 1
+  ios_config:
+    lines:
+      - e164 514555[23]...
+      - e164 555[23]...
+    parents: voice class e164-pattern-map 1
 
-    - name: Configure dial-peer voice 101 voip
-      ios_config:
-        lines:
-          - description CUCM-Facing
-          - destination e164-pattern-map 1
-          - incoming called e164-pattern-map 2
-          - session protocol sipv2
-          - session server-group 1
-          - dtmf-relay rtp-nte
-          - voice-class codec 1
-          - voice-class sip bind control source-interface Gi1
-          - voice-class sip bind media source-interface Gi1
-        parents: dial-peer voice 101 voip
+- name: Configure voice class e164-pattern-map 2
+  ios_config:
+    lines:
+      - e164 +011
+      - e164 +1[2-9]..[2-9]......
+      - e164 +[2-9]..[2-9]......
+      - e164 +911
+    parents: voice class e164-pattern-map 2
 
-    - name: Configure dial-peer voice 201 voip
-      ios_config:
-        lines:
-          - description PSTN-Facing 
-          - incoming called e164-pattern-map 1
-          - destination e164-pattern-map 2
-          - session protocol sipv2
-          - session server-group 2
-          - dtmf-relay rtp-nte
-          - voice-class codec 1
-          - voice-class sip bind control source-interface Gi2
-          - voice-class sip bind media source-interface Gi2
-        parents: dial-peer voice 201 voip
+- name: Configure dial-peer voice 101 voip
+  ios_config:
+    lines:
+      - description CUCM-Facing
+      - destination e164-pattern-map 1
+      - incoming called e164-pattern-map 2
+      - session protocol sipv2
+      - session server-group 1
+      - dtmf-relay rtp-nte
+      - voice-class codec 1
+      - voice-class sip bind control source-interface Gi1
+      - voice-class sip bind media source-interface Gi1
+    parents: dial-peer voice 101 voip
 
-    - name: Configure SIP UA settings
-      ios_config:
-        lines:
-          - sip-ua
-        parents: []
+- name: Configure dial-peer voice 201 voip
+  ios_config:
+    lines:
+      - description PSTN-Facing
+      - incoming called e164-pattern-map 1
+      - destination e164-pattern-map 2
+      - session protocol sipv2
+      - session server-group 2
+      - dtmf-relay rtp-nte
+      - voice-class codec 1
+      - voice-class sip bind control source-interface Gi2
+      - voice-class sip bind media source-interface Gi2
+    parents: dial-peer voice 201 voip
+
+- name: Configure SIP UA settings
+  ios_config:
+    lines:
+      - sip-ua
+    parents: []
