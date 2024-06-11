@@ -1,0 +1,37 @@
+---
+- name: Deploy configurations to all pods
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Run pod1 playbook
+      include_tasks: Pods/pod1.yml
+      when: inventory_hostname in ['pod1_router1', 'pod1_router2']
+
+    - name: Run pod2 playbook
+      include_tasks: Pods/pod2.yml
+      when: inventory_hostname in ['pod2_router1', 'pod2_router2']
+
+    - name: Run pod3 playbook
+      include_tasks: Pods/pod3.yml
+      when: inventory_hostname in ['pod3_router1', 'pod3_router2']
+
+    - name: Run pod4 playbook
+      include_tasks: Pods/pod4.yml
+      when: inventory_hostname in ['pod4_router1', 'pod4_router2']
+
+    - name: Run pod5 playbook
+      include_tasks: Pods/pod5.yml
+      when: inventory_hostname in ['pod5_router1', 'pod5_router2']
+
+    - name: Run pod6 playbook
+      include_tasks: Pods/pod6.yml
+      when: inventory_hostname in ['pod6_router1', 'pod6_router2']
+
+    - name: Run pod7 playbook
+      include_tasks: Pods/pod7.yml
+      when: inventory_hostname in ['pod7_router1', 'pod7_router2']
+
+    - name: Run pod8 playbook
+      include_tasks: Pods/pod8.yml
+      when: inventory_hostname in ['pod8_router1', 'pod8_router2']
