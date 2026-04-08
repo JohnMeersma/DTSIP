@@ -22,7 +22,7 @@
       ios_config:
         lines:
           - ipv4 10.250.250.201
-        parents: voice class server-group 2
+        parents: voice class server-group 2https://github.com/JohnMeersma/DTSIP/blob/June1/config.yml
 
     - name: Configure voice class e164-pattern-map 1
       ios_config:
@@ -96,35 +96,3 @@
           - media-inactivity-criteria all
           - timer receive-rtcp 5
         parents: gateway
-
-    - name: Configure redundancy settings
-      ios_config:
-        lines:
-          - track 1 interface GigabitEthernet1 line-protocol
-          - track 2 interface GigabitEthernet2 line-protocol
-          - redundancy
-          - application redundancy
-          - group 1
-          - name cube_b2b_ha_1
-          - priority 125 failover threshold 75
-          - timers delay 5 reload 60
-          - control G3 protocol 1
-          - data G3
-          - track 1 shutdown
-          - protocol 1
-          - name cube_b2b_ha_1
-          - authentication text sol_ha1
-        parents: []
-
-    - name: Configure interface GigabitEthernet1 redundancy
-      ios_config:
-        lines:
-          - redundancy rii 102
-          - redundancy group 1 ip 10.1.5.100 exclusive
-        parents: interface GigabitEthernet1
-
-    - name: Configure SIP UA settings
-      ios_config:
-        lines:
-          - sip-ua
-        parents: []
