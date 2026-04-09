@@ -22,7 +22,7 @@
       ios_config:
         lines:
           - ipv4 10.250.250.201
-        parents: voice class server-group 2https://github.com/JohnMeersma/DTSIP/blob/June1/config.yml
+        parents: voice class server-group 2
 
     - name: Configure voice class e164-pattern-map 1
       ios_config:
