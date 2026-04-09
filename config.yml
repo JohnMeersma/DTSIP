@@ -56,7 +56,7 @@
 
     - name: Configure dial-peer voice 201 voip
       ios_config:
-      parents: dial-peer voice 201 voip
+        parents: dial-peer voice 201 voip
         lines:
           - incoming called e164-pattern-map 1
           - destination e164-pattern-map 2
