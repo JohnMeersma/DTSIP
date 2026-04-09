@@ -43,13 +43,10 @@
     - name: Configure dial-peer voice 101 voip
       ios_config:
         lines:
-          - description CUCM-Facing
           - destination e164-pattern-map 1
           - incoming called e164-pattern-map 2
           - session protocol sipv2
-          - session transport udp
           - session server-group 1
-          - max-conn 5
           - dtmf-relay rtp-nte
           - voice-class codec 1
           - voice-class sip bind control source-interface Gi1
@@ -59,12 +56,9 @@
     - name: Configure dial-peer voice 201 voip
       ios_config:
         lines:
-          - description PSTN-Facing Inbound-Outbound
           - incoming called e164-pattern-map 1
-          - max-conn 5
           - destination e164-pattern-map 2
           - session protocol sipv2
-          - session transport udp
           - session server-group 2
           - dtmf-relay rtp-nte
           - voice-class codec 1
@@ -81,18 +75,4 @@
           - pass-thru headers unsupp
           - header-passing
           - error-passthru
-          - g729 annexb-all
         parents: voice service voip
-
-    - name: Configure h323 settings
-      ios_config:
-        lines:
-          - call service stop
-        parents: voice service voip h323
-
-    - name: Configure gateway settings
-      ios_config:
-        lines:
-          - media-inactivity-criteria all
-          - timer receive-rtcp 5
-        parents: gateway
