@@ -1,0 +1,52 @@
+---
+- name: Remove Cisco 1000v Voice Config
+  hosts: cisco
+  gather_facts: no
+  connection: network_cli
+
+  tasks:
+
+    - name: Remove dial-peer 101
+      ios_config:
+        lines:
+          - no dial-peer voice 101 voip
+
+    - name: Remove dial-peer 201
+      ios_config:
+        lines:
+          - no dial-peer voice 201 voip
+
+    - name: Remove voice class codec
+      ios_config:
+        lines:
+          - no voice class codec 1
+
+    - name: Remove voice class server-group 1
+      ios_config:
+        lines:
+          - no voice class server-group 1
+
+    - name: Remove voice class server-group 2
+      ios_config:
+        lines:
+          - no voice class server-group 2
+
+    - name: Remove e164 pattern map 1
+      ios_config:
+        lines:
+          - no voice class e164-pattern-map 1
+
+    - name: Remove e164 pattern map 2
+      ios_config:
+        lines:
+          - no voice class e164-pattern-map 2
+
+    - name: Remove voice service voip settings
+      ios_config:
+        lines:
+          - no voice service voip
+
+    - name: Remove SIP UA (if configured)
+      ios_config:
+        lines:
+          - no sip-ua
