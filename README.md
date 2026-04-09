@@ -18,26 +18,29 @@ Clone the DTSIP repository to your local machine
 ```
 git clone <https://github.com/JohnMeersma/DTSIP.git>
 cd DTSIP
+sudo apt update
+sudo apt install -y python3.11 python3.11-venv
 ```
 
 ### Step 2: Create a Virtual Environment
 
 Create a virtual environment to manage dependencies:
 ```
-python3 -m venv venv-mdd
+python3.11 -m venv venv-mdd
 ```
 
 ### Step 3: Activate the Virtual Environment
 
 Activate the virtual environment:
 ```
-source ./venv-mdd/bin/activate
+source venv-mdd/bin/activate
 ```
 
 ### Step 4: Install Required Python Packages
 
 Install the required Python packages listed in requirements.txt:
 ```
+pip install --upgrade pip setuptools wheel
 pip install -r requirements.txt
 pip install certifi
 ```
@@ -48,6 +51,7 @@ Install the necessary Ansible collections specified in requirements.yml:
 ```
 ansible-galaxy collection install -r requirements.yml
 ```
+
 ### Step 6: Disable Host Key Checking
 
 Disable host key checking to avoid SSH key verification issues:
@@ -61,41 +65,14 @@ Ensure your hosts inventory file includes all router configurations. Here is an 
 
 ```
 [cisco]
-router1 ansible_host=10.1.5.12 ansible_user=admin ansible_password=admin ansible_network_os=ios
-router2 ansible_host=10.1.5.13 ansible_user=admin ansible_password=admin ansible_network_os=ios
-router3 ansible_host=10.1.5.14 ansible_user=admin ansible_password=admin ansible_network_os=ios
-router4 ansible_host=10.1.5.15 ansible_user=admin ansible_password=admin ansible_network_os=ios
-router5 ansible_host=10.1.5.16 ansible_user=admin ansible_password=admin ansible_network_os=ios
-router6 ansible_host=10.1.5.17 ansible_user=admin ansible_password=admin ansible_network_os=ios
-router7 ansible_host=10.1.5.18 ansible_user=admin ansible_password=admin ansible_network_os=ios
-router8 ansible_host=10.1.5.19 ansible_user=admin ansible_password=admin ansible_network_os=ios
+router1 ansible_host=10.1.5.101 ansible_user=cucmadmin ansible_password=cisco ansible_network_os=ios
 ```
 
 ### Step 8: Run the Master Playbook
 
 Run the master playbook (main.yml) to apply configurations to all routers:
 ```
-ansible-playbook -i hosts main.yml
-```
-### Directory Structure
-
-Here is an overview of the key files and directories in this repository:
-
-```
-DTSIP/
-├── Pods/
-│   ├── pod1_vCUBE2_config.yml
-│   ├── pod2_vCUBE2_config.yml
-│   ├── pod3_vCUBE2_config.yml
-│   ├── pod4_vCUBE2_config.yml
-│   ├── pod5_vCUBE2_config.yml
-│   ├── pod6_vCUBE2_config.yml
-│   ├── pod7_vCUBE2_config.yml
-│   └── pod8_vCUBE2_config.yml
-├── hosts
-├── main.yml
-├── requirements.txt
-└── requirements.yml
+ansible-playbook -i hosts config.yml
 ```
 
 ### Ensure that your Ubuntu instance has network connectivity to all the routers
