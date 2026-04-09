@@ -74,6 +74,12 @@ Run the master playbook (main.yml) to apply configurations to all routers:
 ```
 ansible-playbook -i hosts config.yml
 ```
+### Step 9: Run the Cleanup Playbook
+
+Run the cleanup playbook (main.yml) to remove CUBE configurations to vCUBE:
+```
+ansible-playbook -i hosts cleanup.yml
+```
 
 ### Ensure that your Ubuntu instance has network connectivity to all the routers
 
