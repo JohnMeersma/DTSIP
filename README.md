@@ -80,6 +80,12 @@ Run the cleanup playbook (main.yml) to remove CUBE configurations to vCUBE:
 ```
 ansible-playbook -i hosts cleanup.yml
 ```
+### Step 10: Resynch the June1 Branch 
+
+Run the cleanup playbook (main.yml) to remove CUBE configurations to vCUBE:
+```
+ git pull origin June1
+```
 
 ### Ensure that your Ubuntu instance has network connectivity to all the routers
 
